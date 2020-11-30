@@ -11,3 +11,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'some_super_secret_key'
 
 db = SQLAlchemy(app)
+
+from app.main import main as main_blueprint
+app.register_blueprint(main_blueprint)
+
+
+# if not os.path.exists(os.path.join(base_path, 'db.sqlite')):
+#     db.create_all()
