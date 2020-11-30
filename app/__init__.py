@@ -15,6 +15,9 @@ db = SQLAlchemy(app)
 from app.main import main as main_blueprint
 app.register_blueprint(main_blueprint)
 
+from app.auth import auth as auth_blueprint
+app.register_blueprint(auth_blueprint, url_prefix='/auth')
+
 
 # if not os.path.exists(os.path.join(base_path, 'db.sqlite')):
 #     db.create_all()
