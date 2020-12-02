@@ -1,5 +1,8 @@
-from . import main
+from flask_admin import BaseView, expose
 
-@main.route('/')
-def index():
-    return "<h1>return from main</h1>"
+
+class AnalyticsView(BaseView):
+    @expose('/')
+    def index(self):
+        return self.render('analytics_index.html')
+

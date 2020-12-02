@@ -1,0 +1,29 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+{{ super() }}
+<div class="row-fluid">
+
+    <div>
+        <h1>Analytics Page</h1>
+        <p class="lead">
+            Analytics
+        </p>
+        <p>
+            This example shows how you can use additional pages.
+        </p>
+        {{ link | safe }}
+    </div>
+
+    <a class="btn btn-primary" href="/"><i class="icon-arrow-left icon-white"></i> Back</a>
+</div>
+{% endblock body %}
+
+
+
+
+    <body>
+        <div>
+            <a href="{{ url_for('admin.index') }}">Go to admin!</a>
+        </div>
+    </body>
+</html>

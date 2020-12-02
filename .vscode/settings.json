@@ -1,3 +1,4 @@
 {
-    "python.linting.enabled": false
+    "python.linting.enabled": false,
+    "python.pythonPath": "c:\\Users\\marty\\.virtualenvs\\urbd-z2kW9HWV\\Scripts\\python.exe"
 }
