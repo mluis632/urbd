@@ -3,6 +3,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_admin import Admin
+from flask_bootstrap import Bootstrap
 
 base_path = os.path.abspath(os.path.dirname(__file__))
 
@@ -15,6 +16,8 @@ app.config['FLASK_ADMIN_SWATCH'] = 'united'
 
 db = SQLAlchemy(app)
 from models import Role, User
+
+bootstrap = Bootstrap(app)
 
 
 
@@ -30,13 +33,13 @@ def load_user(user_id):
 
 from admin import MyModelView, MyAdminIndexView
 
-admin = Admin(app, url='/', name="URBD", index_view=MyAdminIndexView(), base_template='my_master.html', template_mode='bootstrap4')
+admin = Admin(app, name="URBD", index_view=MyAdminIndexView(), base_template='my_master.html', template_mode='bootstrap4')
 
 admin.add_view(MyModelView(Role, db.session, category='Auth'))
 admin.add_view(MyModelView(User, db.session, category='Auth'))
 
 from app.main import AnalyticsView
-admin.add_view(AnalyticsView(name='Analytics', endpoint='/'))
+admin.add_view(AnalyticsView(name='Analytics'))
 
 # if not os.path.exists(os.path.join(base_path, 'db.sqlite')):
 #     db.create_all()

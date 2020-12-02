@@ -1,39 +1,39 @@
 {% extends 'admin/master.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block body %}
 {{ super() }}
-<div class="row-fluid">
+<div class="container">
+    <div class="row-fluid">
 
-    <div>
-        {% if current_user.is_authenticated %}
-        <h1>FRONT PAGE</h1>
-        <p class="lead">
-            Admin Front Page
-        </p>
-        <p>
-            This example shows a basic demonstration.
-        </p>
-        {% else %}
-        <form method="POST" action="">
-            {{ form.hidden_tag() if form.hidden_tag }}
-            {% for f in form if f.type != 'CSRFTokenField' %}
-            <div>
-            {{ f.label }}
-            {{ f }}
-            {% if f.errors %}
-            <ul>
-                {% for e in f.errors %}
-                <li>{{ e }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
+        <div>
+            {% if current_user.is_authenticated %}
+            <h1>FRONT PAGE</h1>
+            <p class="lead">
+                Admin Front Page
+            </p>
+            <p>
+                This example shows a basic demonstration.
+            </p>
+            {% else %}
+            <div class="row">
+                <div class="col-md-4">
+                    {{ wtf.quick_form(form) }}
+                </div>
+                
             </div>
-            {% endfor %}
-            <button class="btn" type="submit">Submit</button>
-        </form>
-        {{ link | safe }}
-        {% endif %}
+               
+            <div class="row mt-4">
+                    <p>
+                        New user?
+                        <a href="{{ url_for('admin.register_view') }}">
+                            Click here to register
+                        </a>
+                    </p>
+            </div>
+            
+            {% endif %}
+        </div>
     </div>
-
-    <a class="btn btn-primary" href="/"><i class="icon-arrow-left icon-white"></i> Back</a>
 </div>
+
 {% endblock body %}
