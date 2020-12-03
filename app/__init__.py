@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_admin import Admin
 from flask_bootstrap import Bootstrap
+from flask_migrate import Migrate
 
 base_path = os.path.abspath(os.path.dirname(__file__))
 
@@ -16,6 +17,9 @@ app.config['FLASK_ADMIN_SWATCH'] = 'united'
 
 db = SQLAlchemy(app)
 from models import Role, User
+from models import Client, Spouse, Dependent, Employer, Business, Asset, Cashflow, Loan
+
+migrate = Migrate(app, db)
 
 bootstrap = Bootstrap(app)
 
@@ -37,6 +41,18 @@ admin = Admin(app, name="URBD", index_view=MyAdminIndexView(), base_template='my
 
 admin.add_view(MyModelView(Role, db.session, category='Auth'))
 admin.add_view(MyModelView(User, db.session, category='Auth'))
+
+admin.add_view(MyModelView(Client, db.session, category='Client'))
+admin.add_view(MyModelView(Spouse, db.session, category='Client'))
+admin.add_view(MyModelView(Dependent, db.session, category='Client'))
+admin.add_view(MyModelView(Employer, db.session, category='Client'))
+admin.add_view(MyModelView(Business, db.session, category='Client'))
+admin.add_view(MyModelView(Asset, db.session, category='Client'))
+admin.add_view(MyModelView(Cashflow, db.session, category='Client'))
+
+admin.add_view(MyModelView(Loan, db.session))
+
+
 
 from app.main import AnalyticsView
 admin.add_view(AnalyticsView(name='Analytics'))
