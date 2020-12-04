@@ -56,5 +56,28 @@ class MyAdminIndexView(AdminIndexView):
 
 
 class MyModelView(ModelView):
+    column_exclude_list = ['created', 'updated']
+    form_excluded_columns = ['created', 'updated']
     def is_accessible(self):
         return current_user.is_authenticated
+
+
+from models import Spouse, Dependent, Employer, Business, Creditor, Asset, Cashflow, Loan
+
+civil_status = [
+    ('single', 'Single'),
+    ('married', 'Married')
+          ]
+from wtforms.fields import StringField
+
+class ClientView(ModelView):
+    inline_models = (Spouse, Dependent, Employer, Business, Creditor, Asset, Cashflow, Loan, )
+    form_choices = {'civil_status': civil_status}
+    column_exclude_list = ['created', 'updated']
+    form_excluded_columns = ['created', 'updated']
+
+    def scaffold_form(self):
+        form_class = super(ClientView, self).scaffold_form()
+        form_class.extra = StringField('Extra')
+        # print(dir(form_class))
+        return form_class
