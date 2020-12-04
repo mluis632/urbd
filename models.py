@@ -54,7 +54,7 @@ class Client(db.Model):
     # record data
     source = db.Column(db.String(100))
     created = db.Column(db.DateTime(), default=datetime.utcnow())
-    updated = db.Column(db.DateTime(), default=datetime.utcnow(), on_update=datetime.utcnow())
+    updated = db.Column(db.DateTime(), default=datetime.utcnow(), onupdate=datetime.utcnow())
     # related 
     spouses = db.relationship('Spouse', backref='client', lazy='dynamic')
     dependents = db.relationship('Dependent', backref='client', lazy='dynamic')
@@ -81,7 +81,7 @@ class Spouse(db.Model):
     # record data
     source = db.Column(db.String(100))
     created = db.Column(db.DateTime(), default=datetime.utcnow())
-    updated = db.Column(db.DateTime(), default=datetime.utcnow(), on_update=datetime.utcnow())
+    updated = db.Column(db.DateTime(), default=datetime.utcnow(), onupdate=datetime.utcnow())
         # related 
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
 
@@ -99,7 +99,7 @@ class Dependent(db.Model):
     # record data
     source = db.Column(db.String(100))
     created = db.Column(db.DateTime(), default=datetime.utcnow())
-    updated = db.Column(db.DateTime(), default=datetime.utcnow(), on_update=datetime.utcnow())
+    updated = db.Column(db.DateTime(), default=datetime.utcnow(), onupdate=datetime.utcnow())
         # related 
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
 
@@ -128,7 +128,7 @@ class Employer(db.Model):
     # record data
     source = db.Column(db.String(100))
     created = db.Column(db.DateTime(), default=datetime.utcnow())
-    updated = db.Column(db.DateTime(), default=datetime.utcnow(), on_update=datetime.utcnow())
+    updated = db.Column(db.DateTime(), default=datetime.utcnow(), onupdate=datetime.utcnow())
         # related 
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
 
@@ -160,7 +160,7 @@ class Business(db.Model):
     # record data
     source = db.Column(db.String(100))
     created = db.Column(db.DateTime(), default=datetime.utcnow())
-    updated = db.Column(db.DateTime(), default=datetime.utcnow(), on_update=datetime.utcnow())
+    updated = db.Column(db.DateTime(), default=datetime.utcnow(), onupdate=datetime.utcnow())
         # related 
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
 
@@ -188,7 +188,7 @@ class Creditor(db.Model):
     # record data
     source = db.Column(db.String(100))
     created = db.Column(db.DateTime(), default=datetime.utcnow())
-    updated = db.Column(db.DateTime(), default=datetime.utcnow(), on_update=datetime.utcnow())
+    updated = db.Column(db.DateTime(), default=datetime.utcnow(), onupdate=datetime.utcnow())
         # related 
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
 
@@ -214,7 +214,7 @@ class Asset(db.Model):
     # record data
     source = db.Column(db.String(100))
     created = db.Column(db.DateTime(), default=datetime.utcnow())
-    updated = db.Column(db.DateTime(), default=datetime.utcnow(), on_update=datetime.utcnow())
+    updated = db.Column(db.DateTime(), default=datetime.utcnow(), onupdate=datetime.utcnow())
         # related 
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
 
@@ -232,7 +232,7 @@ class Cashflow(db.Model):
     # record data
     source = db.Column(db.String(100))
     created = db.Column(db.DateTime(), default=datetime.utcnow())
-    updated = db.Column(db.DateTime(), default=datetime.utcnow(), on_update=datetime.utcnow())
+    updated = db.Column(db.DateTime(), default=datetime.utcnow(), onupdate=datetime.utcnow())
         # related 
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
 
@@ -254,7 +254,7 @@ class Loan(db.Model):
     # record data
     source = db.Column(db.String(100))
     created = db.Column(db.DateTime(), default=datetime.utcnow())
-    updated = db.Column(db.DateTime(), default=datetime.utcnow(), on_update=datetime.utcnow())
+    updated = db.Column(db.DateTime(), default=datetime.utcnow(), onupdate=datetime.utcnow())
     # related 
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
 

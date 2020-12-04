@@ -35,20 +35,14 @@ def load_user(user_id):
 
 
 
-from admin import MyModelView, MyAdminIndexView
+from admin import MyModelView, MyAdminIndexView, ClientView
 
 admin = Admin(app, name="URBD", index_view=MyAdminIndexView(), base_template='my_master.html', template_mode='bootstrap4')
 
 admin.add_view(MyModelView(Role, db.session, category='Auth'))
 admin.add_view(MyModelView(User, db.session, category='Auth'))
 
-admin.add_view(MyModelView(Client, db.session, category='Client'))
-admin.add_view(MyModelView(Spouse, db.session, category='Client'))
-admin.add_view(MyModelView(Dependent, db.session, category='Client'))
-admin.add_view(MyModelView(Employer, db.session, category='Client'))
-admin.add_view(MyModelView(Business, db.session, category='Client'))
-admin.add_view(MyModelView(Asset, db.session, category='Client'))
-admin.add_view(MyModelView(Cashflow, db.session, category='Client'))
+admin.add_view(ClientView(Client, db.session, category='Client'))
 
 admin.add_view(MyModelView(Loan, db.session))
 
