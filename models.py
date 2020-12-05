@@ -45,7 +45,7 @@ class Client(db.Model):
     email = db.Column(db.String(50))
     mobile_number = db.Column(db.String(50))
     # address information
-    address = db.Column(db.String(100))
+    number_unit = db.Column(db.String(100))
     street = db.Column(db.String(100))
     barangay = db.Column(db.String(100))
     city_town = db.Column(db.String(100))

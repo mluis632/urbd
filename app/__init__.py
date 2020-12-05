@@ -13,11 +13,11 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(base_path, 'db.sqlite') 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'some_super_secret_key'
-app.config['FLASK_ADMIN_SWATCH'] = 'united'
+app.config['FLASK_ADMIN_SWATCH'] = 'cosmo'
 
 db = SQLAlchemy(app)
 from models import Role, User
-from models import Client, Spouse, Dependent, Employer, Business, Asset, Cashflow, Loan
+from models import Client, Spouse, Dependent, Employer, Creditor, Business, Asset, Cashflow, Loan
 
 migrate = Migrate(app, db)
 
@@ -37,13 +37,16 @@ def load_user(user_id):
 
 from admin import MyModelView, MyAdminIndexView, ClientView
 
-admin = Admin(app, name="URBD", index_view=MyAdminIndexView(), base_template='my_master.html', template_mode='bootstrap4')
+admin = Admin(app, name="Admin", index_view=MyAdminIndexView(), base_template='my_master.html', template_mode='bootstrap4')
 
 admin.add_view(MyModelView(Role, db.session, category='Auth'))
 admin.add_view(MyModelView(User, db.session, category='Auth'))
 
-admin.add_view(ClientView(Client, db.session, category='Client'))
-
+admin.add_view(ClientView(Client, db.session))
+admin.add_view(MyModelView(Spouse, db.session, category='Relations'))
+admin.add_view(MyModelView(Dependent, db.session, category='Relations'))
+admin.add_view(MyModelView(Employer, db.session, category='References'))
+admin.add_view(MyModelView(Creditor, db.session, category='References'))
 admin.add_view(MyModelView(Loan, db.session))
 
 

@@ -59,6 +59,12 @@ class MyModelView(ModelView):
     column_exclude_list = ['created', 'updated']
     form_excluded_columns = ['created', 'updated']
     create_template = 'create.html'
+    edit_template = 'edit.html'
+    create_template = "create.html"
+    edit_template = "edit.html"
+    list_template = "list.html"
+    details_template = "details.html"
+    
     # def is_accessible(self):
     #     return current_user.is_authenticated
 
@@ -69,11 +75,39 @@ civil_status = [
     ('single', 'Single'),
     ('married', 'Married')
           ]
+id_type = [
+    ('SSS', 'SSS'),
+    ('GSIS', 'GSIS'),
+    ('LTO', 'LTO'),
+    ('TIN', 'TIN')
+]
 from wtforms.fields import StringField
+from wtforms.validators import Email
 
 class ClientView(ModelView):
     inline_models = (Spouse, Dependent, Employer, Business, Creditor, Asset, Cashflow, Loan, )
-    form_choices = {'civil_status': civil_status}
-    column_exclude_list = ['created', 'updated']
+    form_choices = {'civil_status': civil_status, 'id_type': id_type}
+    column_exclude_list = ['created', 'updated', 'middle_name', 'id_number', 
+    'id_type', 'nationality', 'date_birth', 'country', 'source', 'civil_status']
     form_excluded_columns = ['created', 'updated']
-    create_template = 'create.html'
+    
+    can_view_details = True
+    create_template = "create.html"
+    edit_template = "edit.html"
+    list_template = "list.html"
+    details_template = "details.html"
+    # create_modal = True
+    # edit_modal = True
+    
+    # create_template = 'create.html'
+    form_args = {
+    'email': {
+        'validators': [Email(), ]
+    },
+    'city_town': {
+        'label': 'City/Town',
+    }
+}
+    column_labels = dict(city_town='City/Town',
+                            unit_number='Number/Building/Unit')
+    
